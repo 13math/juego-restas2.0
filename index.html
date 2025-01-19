@@ -7,9 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 18px;
             text-align: center;
-            background-color: #f0f8ff;
+            background-color: #e8f5e9;
             color: #333;
         }
         .game-container {
@@ -23,7 +22,7 @@
         input[type="number"] {
             font-size: 20px;
             padding: 10px;
-            width: 100%;
+            width: 90%;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -39,6 +38,14 @@
         }
         button:hover {
             background-color: #d44d56;
+        }
+        select {
+            font-size: 18px;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .result {
             font-size: 1.8em;
@@ -58,6 +65,10 @@
     <h1>Resta y Encuentra</h1>
     <p>Resuelve las restas, sube de nivel y gana puntos antes de que se acabe el tiempo. ¡Elige tu modalidad y comienza a practicar!</p>
     <div class="game-container">
+        <select id="modeSelect">
+            <option value="both">Ambas restas (negativas y no negativas)</option>
+            <option value="nonNegative">Solo restas no negativas</option>
+        </select>
         <p class="level" id="level">Nivel: 1</p>
         <p class="score" id="score">Puntaje: 0</p>
         <p class="timer" id="timer">Tiempo: 30</p>
@@ -65,12 +76,6 @@
         <input type="number" id="answer" placeholder="Escribe tu respuesta">
         <button onclick="checkAnswer()">Comprobar</button>
         <p class="result" id="result"></p>
-        
-        <p><strong>Elige modalidad:</strong></p>
-        <select id="mode" onchange="changeMode()">
-            <option value="both">Ambas restas (negativas y no negativas)</option>
-            <option value="nonNegative">Solo restas no negativas</option>
-        </select>
     </div>
 
     <script>
@@ -87,7 +92,7 @@
         const levelElement = document.getElementById('level');
         const scoreElement = document.getElementById('score');
         const timerElement = document.getElementById('timer');
-        const modeElement = document.getElementById('mode');
+        const modeSelect = document.getElementById('modeSelect');
 
         function generateProblem() {
             if (mode === 'both') {
@@ -158,10 +163,11 @@
             timerElement.textContent = `Tiempo: ${timeLeft}`;
         }
 
-        function changeMode() {
-            mode = modeElement.value;
+        // Cambiar modalidad
+        modeSelect.addEventListener('change', () => {
+            mode = modeSelect.value;
             resetGame(false);
-        }
+        });
     </script>
 </body>
 </html>
