@@ -1,10 +1,9 @@
-<!-- Juego 1: Suma y encuentra el resultado -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suma y Encuentra</title>
+    <title>Resta y Encuentra</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,7 +15,7 @@
         .game-container {
             margin: 20px auto;
             padding: 20px;
-            border: 2px solid #008cba;
+            border: 2px solid #f04f60;
             border-radius: 10px;
             max-width: 400px;
             background-color: #fff;
@@ -30,7 +29,7 @@
             border-radius: 5px;
         }
         button {
-            background-color: #008cba;
+            background-color: #f04f60;
             color: white;
             padding: 15px 25px;
             border: none;
@@ -39,7 +38,7 @@
             font-size: 18px;
         }
         button:hover {
-            background-color: #005f73;
+            background-color: #d44d56;
         }
         .result {
             font-size: 1.8em;
@@ -56,8 +55,8 @@
     </style>
 </head>
 <body>
-    <h1>Suma y Encuentra</h1>
-    <p>Resuelve las sumas, sube de nivel y gana puntos antes de que se acabe el tiempo. ¡Es hora de practicar!</p>
+    <h1>Resta y Encuentra</h1>
+    <p>Resuelve las restas, sube de nivel y gana puntos antes de que se acabe el tiempo. ¡Es hora de practicar!</p>
     <div class="game-container">
         <p class="level" id="level">Nivel: 1</p>
         <p class="score" id="score">Puntaje: 0</p>
@@ -85,7 +84,7 @@
         function generateProblem() {
             num1 = Math.floor(Math.random() * (10 * level)) + 1;
             num2 = Math.floor(Math.random() * (10 * level)) + 1;
-            problemElement.textContent = `¿Cuánto es ${num1} + ${num2}?`;
+            problemElement.textContent = `¿Cuánto es ${num1} - ${num2}?`;
         }
 
         generateProblem();
@@ -102,7 +101,7 @@
 
         function checkAnswer() {
             const userAnswer = parseInt(document.getElementById('answer').value);
-            const correctAnswer = num1 + num2;
+            const correctAnswer = num1 - num2;
 
             if (userAnswer === correctAnswer) {
                 score += level * 10;
