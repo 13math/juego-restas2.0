@@ -56,7 +56,7 @@
 </head>
 <body>
     <h1>Resta y Encuentra</h1>
-    <p>Resuelve las restas, sube de nivel y gana puntos antes de que se acabe el tiempo. ¡Es hora de practicar!</p>
+    <p>Resuelve las restas, sube de nivel y gana puntos antes de que se acabe el tiempo. ¡Elige tu modalidad y comienza a practicar!</p>
     <div class="game-container">
         <p class="level" id="level">Nivel: 1</p>
         <p class="score" id="score">Puntaje: 0</p>
@@ -65,6 +65,12 @@
         <input type="number" id="answer" placeholder="Escribe tu respuesta">
         <button onclick="checkAnswer()">Comprobar</button>
         <p class="result" id="result"></p>
+        
+        <p><strong>Elige modalidad:</strong></p>
+        <select id="mode" onchange="changeMode()">
+            <option value="both">Ambas restas (negativas y no negativas)</option>
+            <option value="nonNegative">Solo restas no negativas</option>
+        </select>
     </div>
 
     <script>
@@ -74,16 +80,23 @@
         let score = 0;
         let correctAnswers = 0;
         let timeLeft = 30;
+        let mode = 'both'; // El valor inicial es 'both', permitiendo tanto resultados negativos como no negativos
 
         const problemElement = document.getElementById('problem');
         const resultElement = document.getElementById('result');
         const levelElement = document.getElementById('level');
         const scoreElement = document.getElementById('score');
         const timerElement = document.getElementById('timer');
+        const modeElement = document.getElementById('mode');
 
         function generateProblem() {
-            num1 = Math.floor(Math.random() * (10 * level)) + 1;
-            num2 = Math.floor(Math.random() * (10 * level)) + 1;
+            if (mode === 'both') {
+                num1 = Math.floor(Math.random() * (10 * level)) + 1;
+                num2 = Math.floor(Math.random() * (10 * level)) + 1;
+            } else if (mode === 'nonNegative') {
+                num1 = Math.floor(Math.random() * (10 * level)) + 5;  // Asegura que num1 sea siempre mayor
+                num2 = Math.floor(Math.random() * num1);  // num2 siempre será menor que num1
+            }
             problemElement.textContent = `¿Cuánto es ${num1} - ${num2}?`;
         }
 
@@ -143,6 +156,11 @@
             levelElement.textContent = `Nivel: ${level}`;
             scoreElement.textContent = `Puntaje: ${score}`;
             timerElement.textContent = `Tiempo: ${timeLeft}`;
+        }
+
+        function changeMode() {
+            mode = modeElement.value;
+            resetGame(false);
         }
     </script>
 </body>
